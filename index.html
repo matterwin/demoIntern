@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Demo for CI</title>
+</head>
+<body>
+    <p id="words">GENERAL DYNAMICS INFORMATION TECHNOLOGY</p>
+    <div>
+        <img src="https://www.freepnglogos.com/uploads/jet-png/air-force-jet-png-transparent-air-force-jet-images-pluspng-11.png">
+    </div>
+</html>
+
+<style>
+
+    #words{
+        color:#707274;
+        font-size: 300%;
+        text-align: center;
+        font-weight: bolder;
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+    }
+
+    html {
+        background-image: url('https://images.ctfassets.net/szx3os6exj55/1Qh3eQMGOc1Q5a99F3fy4y/0c70669530d2319299c5348c4f6a53f3/GDIT-Aviation-2880x1280.jpg?w=2880&q=72');
+    }
+
+    img {
+        padding-top: 180px;
+    }
+
+</style>
+
+<script>
+
+    var img = document.getElementsByTagName('img')[0];
+    var shrinkTimer, growTimer, moveTimer;
+
+    img.style.position='absolute';
+    img.style.left='0px';
+
+    function move(){
+        var oldLeft = parseInt(img.style.left);
+        var newLeft = oldLeft + 1;
+        if(newLeft >= (window.innerWidth-(img.width-40)))
+        {
+            img.style.left = '0px';
+        }
+        else
+            img.style.left = newLeft + 'px';
+    }
+
+    function makeImgSmaller() {
+        move();
+        img.setAttribute('width', img.width - 1);
+        if(img.width <= 200)
+        {
+            window.clearInterval(shrinkTimer);
+            growTimer = window.setInterval(makeImgBigger, 1000/144);
+            return;
+        }
+    }
+
+    function makeImgBigger() {
+        move();
+        img.setAttribute('width', img.width + 1);
+        if(img.width >= 600)
+        {
+            window.clearInterval(growTimer);
+            shrinkTimer = window.setInterval(makeImgSmaller, 1000/144);
+            return;
+            console.log(img.width);
+        }
+    }
+
+    growTimer = window.setInterval(makeImgBigger, 1000/144);
+
+</script>
